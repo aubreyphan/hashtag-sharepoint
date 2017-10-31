@@ -6,6 +6,7 @@ import { HttpClient, IHttpClientOptions, HttpClientConfiguration } from '@micros
 
 //Office-ui-fabric-react
 import { Image } from 'office-ui-fabric-react/lib/Image';
+import { Label } from 'office-ui-fabric-react/lib/Label';
 
 export interface IAppProps extends IAppWebPartProps {
   basicHttpClient: HttpClient;
@@ -84,6 +85,7 @@ export default class App extends React.Component<IAppProps, ITweetsState}> {
         <div className={`ms-Grid-row ${styles.creator}`}></div>
 
         <div className={`ms-Grid-row ${styles.body}`}>
+          <Label>Check these tweets out!</Label>
           {tweets} 
         </div>          
 
