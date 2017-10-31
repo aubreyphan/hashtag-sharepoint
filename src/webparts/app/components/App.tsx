@@ -28,7 +28,7 @@ export interface ITweetsItem {
   created_at: string
 }
 
-export default class App extends React.Component<IAppProps, ITweetsState}> {
+export default class App extends React.Component<IAppProps, ITweetsState> {
   
   //initiating tweets intial state
   constructor(props: IAppProps, state: ITweetsState) {
