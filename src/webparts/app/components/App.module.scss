@@ -8,6 +8,28 @@
   .row {
     padding: 20px;
   }
+  .title{
+    font-size: 50px;
+  }
+  .header {
+    @extend .row;
+    background: rgba(0,0,0,0.9);
+  }
+  .creator {
+    height: 10px;
+    background: rgb(201, 213, 221);
+  }
+  .body {
+    @extend .row;
+    background: rgb(0,120,215);
+  }
+  
+  .tweetPost {
+    @extend .row;
+    margin: 20px;
+    border: #000 10px;
+    background: #ffffff;
+  }
 
   .listItem {
     max-width: 715px;

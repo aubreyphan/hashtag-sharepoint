@@ -21,6 +21,9 @@
     "@types/react-addons-update": "0.14.14",
     "@types/react-dom": "0.14.18",
     "@types/webpack-env": ">=1.12.1 <1.14.0",
+    "jquery": "^3.2.1",
+    "moment": "^2.19.1",
+    "office-ui-fabric-react": "^5.17.0",
     "react": "15.4.2",
     "react-dom": "15.4.2"
   },

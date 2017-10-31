@@ -1,8 +1,17 @@
 import * as React from 'react';
 import styles from './App.module.scss';
+import { css } from 'office-ui-fabric-react';
 import { IAppWebPartProps } from '../IAppWebPartProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { HttpClient, IHttpClientOptions, HttpClientConfiguration } from '@microsoft/sp-http';
+
+//Office-ui-fabric-react
+// import {
+//   Spinner,
+//   SpinnerSize
+// } from 'office-ui-fabric-react/lib/Spinner';
+// import 'office-ui-fabric-react/lib/components/Spinner/examples/Spinner.Basic.Example.scss';
+import { Image } from 'office-ui-fabric-react/lib/Image';
 
 export interface IAppProps extends IAppWebPartProps {
   basicHttpClient: HttpClient;
@@ -15,6 +24,7 @@ export interface ITweetsState {
 export interface ITweetsItem {
   statuses: any,
   user: {
+    profile_image_url_https: string,
     name: string,
     screen_name: string,
     location: string
@@ -25,6 +35,7 @@ export interface ITweetsItem {
 
 export default class App extends React.Component<IAppProps, {tweets: any}> {
   
+  //initiating tweets intial state
   constructor(props: IAppProps, state: ITweetsState) {
     super(props);
     this.state = {
@@ -33,38 +44,68 @@ export default class App extends React.Component<IAppProps, {tweets: any}> {
   }
 
   public render(): JSX.Element {
+
+    //tweets template
     const tweets: JSX.Element[] = this.state.tweets.map((tweet: ITweetsItem, k: number): JSX.Element => {
       return (
-        <div key={k} className="tweet-post">  
-          <h1>{tweet.user.name}</h1>
-          <h5>{tweet.user.screen_name}</h5>
-          <h5>{tweet.user.location}</h5>
-          <h3>{tweet.text}</h3>
+        <div key={k} className={styles.tweetPost}>  
+
+          <div className={ "ms-Grid-row" } >
+            <div className={ "ms-Grid-col ms-lg-2 ms-xl2"}>
+              <Image src={tweet.user.profile_image_url_https} />
+            </div>
+            <div className={ "ms-Grid-col ms-lg-10 ms-xl10"}>
+              <b>{tweet.user.name}</b>
+              <br />
+              @{tweet.user.screen_name} - {tweet.user.location}
+            </div>
+          </div>
+
+          <div className={ "ms-Grid-row" }>
+            <hr />
+            <h3>{tweet.text}</h3>
+            <h5>{tweet.created_at}</h5>
+          </div>    
+          
         </div>        
       )
     });
 
+    //app template
     return (
-    <div>
+    <div className={styles.app}>
       <div className={styles.container}>
-        <div className={`ms-Grid-row ms-bgColor-themeDark ms-fontColor-white ${styles.row}`}>
-          <div className="ms-Grid-col ms-lg10 ms-xl8 ms-xlPush2 ms-lgPush1">
-            
-            <span className="ms-font-xl ms-fontColor-white">Welcome to !</span>
-            <p className="ms-font-l ms-fontColor-white">Created by Aubrey Phan</p>
-            {tweets} 
 
+        <div className={`ms-Grid-row  ${styles.header}`}>
+          <div className="ms-Grid-col ms-lg-3 ms-xl3 ms-xlPush2 ms-lgPush1">
+            <Image src="https://static1.squarespace.com/static/585fa2e4ebbd1af27cda80da/58b00b94be659418cfcb2cbb/58b00bf52994cabdb1a62a7d/1487932495208/Twitter-Icon.png?format=100w" alt="twitter icon" />
+          </div>
+          <div className="ms-Grid-col ms-lg-9 ms-xl9 ms-xlPush2 ms-lgPush1">             
+            <span className={`ms-fontColor-white ${styles.title}`}>#sharepoint</span>
+            <br />
+            <span className="ms-fontColor-white ms-font-xl">Created by Aubrey Phan</span>
           </div>
         </div>
-      </div>
-    </div>
+
+        <div className={`ms-Grid-row ${styles.creator}`}></div>
+
+        <div className={`ms-Grid-row ${styles.body}`}>
+          {/* <div className="spinner">
+                <Spinner size={ SpinnerSize.large } />
+          </div> */}
+          {tweets} 
+        </div>          
+
+        </div> {/* end container*/}
+    </div> //end return
     );
   }
 
-  public componentDidMount() {
-    console.log("componentDidMount!!");
-    this.getTweets(this.props.description);
-  }
+  // public componentDidMount() {
+  //   console.log("component Did Mount!");
+  //   this.getTweets(this.props.description);
+  // }
+
   private getTweets(description: string): void {
     var httpClientOptions : IHttpClientOptions = {};
     httpClientOptions.headers = {
@@ -82,6 +123,7 @@ export default class App extends React.Component<IAppProps, {tweets: any}> {
         this.setState({
           tweets: response.statuses
         });
+        
       }, (error: any): void => {
         this.setState({
           tweets: []
