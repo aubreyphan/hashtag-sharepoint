@@ -1,16 +1,10 @@
 import * as React from 'react';
 import styles from './App.module.scss';
-import { css } from 'office-ui-fabric-react';
 import { IAppWebPartProps } from '../IAppWebPartProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { HttpClient, IHttpClientOptions, HttpClientConfiguration } from '@microsoft/sp-http';
 
 //Office-ui-fabric-react
-// import {
-//   Spinner,
-//   SpinnerSize
-// } from 'office-ui-fabric-react/lib/Spinner';
-// import 'office-ui-fabric-react/lib/components/Spinner/examples/Spinner.Basic.Example.scss';
 import { Image } from 'office-ui-fabric-react/lib/Image';
 
 export interface IAppProps extends IAppWebPartProps {
@@ -33,10 +27,10 @@ export interface ITweetsItem {
   created_at: string
 }
 
-export default class App extends React.Component<IAppProps, {tweets: any}> {
+export default class App extends React.Component<IAppProps, {}> {
   
   //initiating tweets intial state
-  constructor(props: IAppProps, state: ITweetsState) {
+  constructor(props: IAppProps) {
     super(props);
     this.state = {
       tweets: []
@@ -90,9 +84,6 @@ export default class App extends React.Component<IAppProps, {tweets: any}> {
         <div className={`ms-Grid-row ${styles.creator}`}></div>
 
         <div className={`ms-Grid-row ${styles.body}`}>
-          {/* <div className="spinner">
-                <Spinner size={ SpinnerSize.large } />
-          </div> */}
           {tweets} 
         </div>          
 
