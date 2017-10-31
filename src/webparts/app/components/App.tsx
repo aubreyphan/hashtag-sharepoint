@@ -101,10 +101,10 @@ export default class App extends React.Component<IAppProps, {tweets: any}> {
     );
   }
 
-  // public componentDidMount() {
-  //   console.log("component Did Mount!");
-  //   this.getTweets(this.props.description);
-  // }
+  public componentDidMount() {
+    console.log("component Did Mount!");
+    this.getTweets(this.props.description);
+  }
 
   private getTweets(description: string): void {
     var httpClientOptions : IHttpClientOptions = {};
