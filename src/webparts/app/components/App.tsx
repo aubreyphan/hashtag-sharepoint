@@ -59,7 +59,7 @@ export default class App extends React.Component<IAppProps, ITweetsState> {
           <div className={ "ms-Grid-row" }>
             <hr />
             <h3>{tweet.text}</h3>
-            <h5>{tweet.created_at}</h5>
+            <h5>Posted at {tweet.created_at}</h5>
           </div>    
           
         </div>        
@@ -85,7 +85,7 @@ export default class App extends React.Component<IAppProps, ITweetsState> {
         <div className={`ms-Grid-row ${styles.creator}`}></div>
 
         <div className={`ms-Grid-row ${styles.body}`}>
-          <Label>Check these tweets out!</Label>
+          <Label className="ms-textAlignCenter">Check these tweets out!</Label>
           {tweets} 
         </div>          
 
